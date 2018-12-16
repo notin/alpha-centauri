@@ -1,12 +1,7 @@
 package com.aws.codestar.project.controller;
 
 import com.aws.codestar.project.pojos.Conversation;
-import org.json.JSONObject;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.logging.Logger;
 
@@ -26,10 +21,16 @@ public class ConversationController
         return build;
     }
 
-    @RequestMapping(method = RequestMethod.POST, produces = "application/json")
-    public void setConversation(@RequestParam(value = "name", defaultValue = "World") Conversation conversation) {
-
-        Logger.getAnonymousLogger().info(String.valueOf(conversation.getId()));
+    @CrossOrigin
+    @RequestMapping( method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
+    @ResponseBody
+    public void receive(@RequestBody  Conversation conversation)
+    {
+        Logger.getAnonymousLogger().info(conversation.toString());
+//        List<MessagesItem> messages = conversation.getMessage();
+//        //TODO:Call db
+//
+//        int index = messages.size()-1;
+//        messageService.saveAllMessages(messages);
     }
-
 }

@@ -2,6 +2,7 @@ package com.aws.codestar.project.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.util.UUID;
 import java.util.logging.Logger;
 
 public class Helper {
@@ -19,5 +20,9 @@ public class Helper {
             logger.info(e.getMessage());
         }
         return jsonInString;
+    }
+
+    public static String getUUID() {
+        return String.valueOf(UUID.randomUUID());
     }
 }
