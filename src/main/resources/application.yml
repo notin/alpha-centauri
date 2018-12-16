@@ -12,8 +12,8 @@ spring:
     platform: mariadb
     driverClassName: org.mariadb.jdbc.Driver
     url: jdbc:mariadb://db.cqpwzda9ijyr.us-east-2.rds.amazonaws.com:3306/h885dsv04ardvjej
-    username: chadvansyoc11
-    password: freyaAWS1!
+    username: admin
+    password: l33tSp3ak9(
     autoReconnect: true
     maxActive: 500
 
