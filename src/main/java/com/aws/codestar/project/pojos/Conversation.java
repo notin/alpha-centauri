@@ -6,7 +6,6 @@ import lombok.Data;
 
 import javax.annotation.Generated;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import java.util.ArrayList;
@@ -22,8 +21,8 @@ import static com.aws.codestar.project.util.Helper.toJson;
 public class Conversation{
 
 	@JsonProperty("messageItem")
-    @OneToMany(targetEntity=MessagesItem.class, mappedBy="id", fetch=FetchType.EAGER)
-	private List<MessagesItem> messageItem = null;
+    @OneToMany
+	private List<MessagesItem> messageItem;
 
 	@Id
 	@JsonProperty("id")
@@ -44,6 +43,9 @@ public class Conversation{
 	{
 		return id;
 	}
+
+	public void setId(String id)
+	{ this.id = id == null ? getUUID() : id; }
 
 	@Override
 	public String toString()

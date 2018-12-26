@@ -1,6 +1,8 @@
 package com.aws.codestar.project.controller;
 
 import com.aws.codestar.project.pojos.Conversation;
+import com.aws.codestar.project.pojos.ConversationService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.logging.Logger;
@@ -12,6 +14,9 @@ import java.util.logging.Logger;
 @RequestMapping("/conversation")
 public class ConversationController
 {
+
+    @Autowired
+    private ConversationService conversationService;
 
     @RequestMapping(method = RequestMethod.GET, produces = "application/json")
     public Conversation getConversation() {
@@ -27,10 +32,7 @@ public class ConversationController
     public void receive(@RequestBody  Conversation conversation)
     {
         Logger.getAnonymousLogger().info(conversation.toString());
-//        List<MessagesItem> messages = conversation.getMessage();
-//        //TODO:Call db
-//
-//        int index = messages.size()-1;
-//        messageService.saveAllMessages(messages);
+
+        conversationService.saveConversation(conversation);
     }
 }

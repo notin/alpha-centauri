@@ -11,7 +11,7 @@ spring:
   datasource:
     platform: mariadb
     driverClassName: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://test2.cqpwzda9ijyr.us-east-2.rds.amazonaws.com:3306
+    url: jdbc:mariadb://test2.cqpwzda9ijyr.us-east-2.rds.amazonaws.com:3306/test
     username: admin
     password: l33tSp3ak9(
     autoReconnect: true

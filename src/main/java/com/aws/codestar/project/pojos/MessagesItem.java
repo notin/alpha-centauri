@@ -29,9 +29,10 @@ public class MessagesItem{
 	private String user;
 
 	public  String getId()
-	{
-		return id;
-	}
+	{ return id; }
+
+	public void setId(String id)
+	{ this.id = id == null ? getUUID() : id; }
 
 	@Override
 	public String toString()
