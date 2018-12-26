@@ -18,21 +18,23 @@ public class ConversationController
     @Autowired
     private ConversationService conversationService;
 
-    @RequestMapping(method = RequestMethod.GET, produces = "application/json")
-    public Conversation getConversation() {
-
-        Conversation build = Conversation.builder().build();
-        Logger.getAnonymousLogger().info(build.toString());
-        return build;
-    }
-
     @CrossOrigin
     @RequestMapping( method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
     @ResponseBody
-    public void receive(@RequestBody  Conversation conversation)
+    public String receive(@RequestBody  Conversation conversation)
     {
         Logger.getAnonymousLogger().info(conversation.toString());
-
         conversationService.saveConversation(conversation);
+        return conversation.getId();
+    }
+
+    @CrossOrigin
+    @RequestMapping( method = RequestMethod.GET, produces = "application/json")
+    public Conversation send(@RequestParam String id)
+    {
+        String id1 = id;
+        Conversation conversationByID = conversationService.findConversationByID(id1);
+        Logger.getAnonymousLogger().info(conversationByID.toString());
+        return conversationByID;
     }
 }
