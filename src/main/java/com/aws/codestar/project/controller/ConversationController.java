@@ -2,6 +2,7 @@ package com.aws.codestar.project.controller;
 
 import com.aws.codestar.project.pojos.Conversation;
 import com.aws.codestar.project.pojos.ConversationService;
+import com.aws.codestar.project.util.Helper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,9 +33,18 @@ public class ConversationController
     @RequestMapping( method = RequestMethod.GET, produces = "application/json")
     public Conversation send(@RequestParam String id)
     {
-        String id1 = id;
-        Conversation conversationByID = conversationService.findConversationByID(id1);
-        Logger.getAnonymousLogger().info(conversationByID.toString());
-        return conversationByID;
+        Conversation conversation = null;
+        if(id !=null & !id.equalsIgnoreCase("") & !id.equalsIgnoreCase("null"))
+        {
+            conversation = conversationService.findConversationByID(id);
+            return conversation;
+        }
+        else
+        {
+           conversation = Conversation.builder().build();
+           conversation.getMessageItem().stream().forEachOrdered(x->x.setTimestamps(Helper.getCurrentLocalDateTimeStamp()));
+        }
+        Logger.getAnonymousLogger().info(conversation.toString());
+        return conversation;
     }
 }

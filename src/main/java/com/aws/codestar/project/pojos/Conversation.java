@@ -28,11 +28,11 @@ public class Conversation{
 	@JsonProperty("id")
 	private String id = getUUID();;
 
-    public List<MessagesItem> getmessageItem()
+    public List<MessagesItem> getMessageItem()
 	{
 		if(messageItem == null)
 		{
-			MessagesItem messagesItem =MessagesItem.builder().build();
+			MessagesItem messagesItem = MessagesItem.builder().build();
 			messageItem = new ArrayList<>();
 			messageItem.add(messagesItem);
 		}
@@ -41,6 +41,7 @@ public class Conversation{
 
 	public  String getId()
 	{
+		this.id = id == null ? getUUID() : id;
 		return id;
 	}
 

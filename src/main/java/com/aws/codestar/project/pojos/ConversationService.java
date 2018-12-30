@@ -16,7 +16,7 @@ public class ConversationService {
 
     public void saveConversation( Conversation conversation)
     {
-        messageItemRepository.saveAll(conversation.getmessageItem());
+        messageItemRepository.saveAll(conversation.getMessageItem());
         conversationRepository.save(conversation);
     }
 
