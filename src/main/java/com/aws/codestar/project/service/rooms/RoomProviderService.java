@@ -1,11 +1,9 @@
 package com.aws.codestar.project.service.rooms;
 
-import com.aws.codestar.project.pojos.conversation.Conversation;
 import com.aws.codestar.project.pojos.rooms.Room;
+import com.aws.codestar.project.pojos.rooms.RoomProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class RoomProviderService
@@ -17,15 +15,26 @@ public class RoomProviderService
     @Autowired
     RoomRepository roomRepository;
 
-    public void reserveRoom(Room s)
+    public void reserveRoom(RoomProvider roomProvider, Room s)
     {
         roomRepository.save(s);
+        roomProviderRepository.save(roomProvider);
     }
 
-    public Conversation getRooms(String id)
+    public RoomProvider getRooms()
     {
-        String id1 = id;
-        Optional<Conversation> byId = roomProviderRepository.findById(id1);
-        return byId.get();
+        Iterable<RoomProvider> all = roomProviderRepository.findAll();
+
+        RoomProvider next = RoomProvider.builder().build();
+
+        for( RoomProvider roomProvider: all)
+        {
+            if(roomProvider.getProvider()!= null && !roomProvider.getProvider().isEmpty())
+            {
+                next = roomProvider;
+                break;
+            }
+        }
+        return next;
     }
 }

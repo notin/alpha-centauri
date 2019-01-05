@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 
 import static com.aws.codestar.project.util.Helper.toJson;
 
@@ -28,6 +29,12 @@ public class Room
 
 	@JsonProperty("userId")
 	private String userId;
+
+	@Id
+	@JsonProperty("id")
+	private String id;
+
+
 
 	@Override
  	public String toString() { return toJson(this); }

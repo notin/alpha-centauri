@@ -12,42 +12,34 @@ import java.util.logging.Logger;
  * Basic Spring web service controller that handles all GET requests.
  */
 @RestController
-@RequestMapping("/conversation")
+@RequestMapping("/roomprovider")
 public class RoomProviderController
 {
 
     @Autowired
-    private RoomProviderService roomProvider;
+    private RoomProviderService roomProviderService;
 
     @CrossOrigin
-    @RequestMapping( method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
+    @RequestMapping(method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
     @ResponseBody
-    public RoomProvider receive(@RequestBody  RoomProvider roomProvider)
+    public RoomProvider receive(@RequestBody RoomProvider roomProvider)
     {
         Logger.getAnonymousLogger().info(roomProvider.toString());
 
         String requesterId = roomProvider.getRequesterId();
         Room room = roomProvider.getProvider().stream().filter(x -> x.isAvailable() == true && x.getUserId().equalsIgnoreCase(requesterId)).findFirst().get();
-        this.roomProvider.reserveRoom(room);
+        roomProviderService.reserveRoom(roomProvider, room);
         return roomProvider;
     }
 
-//    @CrossOrigin
-//    @RequestMapping( method = RequestMethod.GET, produces = "application/json")
-//    public Conversation send(@RequestParam String id)
-//    {
-//        Conversation conversation = null;
-//        if(id !=null & !id.equalsIgnoreCase("") & !id.equalsIgnoreCase("null"))
-//        {
-//            conversation = roomProvider.getRooms(id);
-//            return conversation;
-//        }
-//        else
-//        {
-//           conversation = Conversation.builder().build();
-//           conversation.getMessageItem().stream().forEachOrdered(x->x.setTimestamps(Helper.getCurrentLocalDateTimeStamp()));
-//        }
-//        Logger.getAnonymousLogger().info(conversation.toString());
-//        return conversation;
-//    }
+    @CrossOrigin
+    @RequestMapping(method = RequestMethod.GET, produces = "application/json")
+    public RoomProvider send()
+    {
+        Logger.getAnonymousLogger().info(roomProviderService.toString());
+
+        RoomProvider roomProvider = roomProviderService.getRooms();
+
+        return roomProvider;
+    }
 }
