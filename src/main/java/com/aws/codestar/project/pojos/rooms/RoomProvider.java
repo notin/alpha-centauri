@@ -1,10 +1,9 @@
-package com.aws.codestar.project.pojos;
+package com.aws.codestar.project.pojos.rooms;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Data;
 
-import javax.annotation.Generated;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -14,30 +13,24 @@ import java.util.List;
 import static com.aws.codestar.project.util.Helper.getUUID;
 import static com.aws.codestar.project.util.Helper.toJson;
 
-@Generated("com.robohorse.robopojogenerator")
 @Data
 @Entity
 @Builder
-public class Conversation{
+public class RoomProvider{
 
-	@JsonProperty("messageItem")
-    @OneToMany
-	private List<MessagesItem> messageItem;
+	@JsonProperty("provider")
+	@OneToMany
+	private List<Room> provider;
 
 	@Id
 	@JsonProperty("id")
-	private String id = getUUID();;
+	private String id;
 
-    public List<MessagesItem> getMessageItem()
-	{
-		if(messageItem == null)
-		{
-			MessagesItem messagesItem = MessagesItem.builder().build();
-			messageItem = new ArrayList<>();
-			messageItem.add(messagesItem);
-		}
-		return messageItem;
-	}
+	@JsonProperty("name")
+	private String name;
+
+	@JsonProperty("requesterId")
+	private String requesterId;
 
 	public  String getId()
 	{
@@ -47,6 +40,28 @@ public class Conversation{
 
 	public void setId(String id)
 	{ this.id = id == null ? getUUID() : id; }
+
+	public List<Room> getProvider()
+	{
+		prepList();
+		return provider;
+	}
+
+	public void setProvider( List<Room> rooms)
+	{
+		prepList();
+		provider = rooms;
+	}
+
+	private void prepList()
+	{
+		boolean b = this.provider == null || provider.isEmpty();
+		if(b)
+		{
+			this.provider = new ArrayList<>();
+			provider.add(Room.builder().build());
+		}
+	}
 
 	@Override
 	public String toString()

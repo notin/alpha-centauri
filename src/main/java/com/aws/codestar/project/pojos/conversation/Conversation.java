@@ -1,4 +1,4 @@
-package com.aws.codestar.project.pojos;
+package com.aws.codestar.project.pojos.conversation;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
@@ -6,6 +6,9 @@ import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.aws.codestar.project.util.Helper.getUUID;
 import static com.aws.codestar.project.util.Helper.toJson;
@@ -13,20 +16,26 @@ import static com.aws.codestar.project.util.Helper.toJson;
 @Data
 @Entity
 @Builder
-public class MessagesItem{
+public class Conversation{
 
-	@JsonProperty("timestamps")
-	private String timestamps;
+	@JsonProperty("messageItem")
+    @OneToMany
+	private List<MessagesItem> messageItem;
 
 	@Id
 	@JsonProperty("id")
 	private String id = getUUID();
 
-	@JsonProperty("message")
-	private String message;
-
-	@JsonProperty("user")
-	private String user;
+	public List<MessagesItem> getMessageItem()
+	{
+		if(messageItem == null)
+		{
+			MessagesItem messagesItem = MessagesItem.builder().build();
+			messageItem = new ArrayList<>();
+			messageItem.add(messagesItem);
+		}
+		return messageItem;
+	}
 
 	public  String getId()
 	{
@@ -42,5 +51,4 @@ public class MessagesItem{
 	{
 		return toJson(this);
 	}
-
 }
