@@ -28,6 +28,7 @@ public class RoomProviderController
 
         String requesterId = roomProvider.getRequesterId();
         Room room = roomProvider.getProvider().stream().filter(x -> x.isAvailable() == true && x.getUserId().equalsIgnoreCase(requesterId)).findFirst().get();
+        Logger.getAnonymousLogger().info("room being updated is "+room.getId());
         roomProviderService.reserveRoom(roomProvider, room);
         return roomProvider;
     }

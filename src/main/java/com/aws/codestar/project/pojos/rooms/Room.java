@@ -34,8 +34,6 @@ public class Room
 	@JsonProperty("id")
 	private String id;
 
-
-
 	@Override
  	public String toString() { return toJson(this); }
 }

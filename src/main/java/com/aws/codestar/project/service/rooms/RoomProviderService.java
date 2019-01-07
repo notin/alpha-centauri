@@ -24,7 +24,6 @@ public class RoomProviderService
     public RoomProvider getRooms()
     {
         Iterable<RoomProvider> all = roomProviderRepository.findAll();
-
         RoomProvider next = RoomProvider.builder().build();
 
         for( RoomProvider roomProvider: all)
