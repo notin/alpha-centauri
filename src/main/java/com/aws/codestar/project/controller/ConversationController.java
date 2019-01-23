@@ -42,7 +42,8 @@ public class ConversationController
         else
         {
            conversation = Conversation.builder().build();
-           conversation.getMessageItem().stream().forEachOrdered(x->x.setTimestamps(Helper.getCurrentLocalDateTimeStamp()));
+            //noinspection SimplifyStreamApiCallChains
+            conversation.getMessageItem().stream().forEachOrdered(x->x.setTimestamps(Helper.getCurrentLocalDateTimeStamp()));
         }
         Logger.getAnonymousLogger().info(conversation.toString());
         return conversation;

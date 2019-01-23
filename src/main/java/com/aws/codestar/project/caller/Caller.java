@@ -11,9 +11,10 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+@SuppressWarnings("ArraysAsListWithZeroOrOneArgument")
 public class Caller
 {
-    Logger logger = Logger.getAnonymousLogger();
+    private Logger logger = Logger.getAnonymousLogger();
     private RestTemplate restTemplate;
 
     public Caller()
@@ -45,7 +46,7 @@ public class Caller
         return response;
     }
 
-    protected void loggingCall(String postBody, String baseForExchange)
+    private void loggingCall(String postBody, String baseForExchange)
     {
         logger.info(baseForExchange);
         if (postBody != null)
@@ -82,14 +83,11 @@ public class Caller
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
-        //        httpHeaders.add("Authorization", token);
         httpHeaders.add("cookie", token);
-
 
         for (String key : httpHeaders.keySet())
         {
             logger.info(key + ":" + httpHeaders.get(key));
-
         }
         return httpHeaders;
     }

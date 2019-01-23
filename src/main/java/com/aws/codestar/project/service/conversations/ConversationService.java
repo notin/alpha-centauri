@@ -23,8 +23,7 @@ public class ConversationService {
 
     public Conversation findConversationByID(String id)
     {
-        String id1 = id;
-        Optional<Conversation> byId = conversationRepository.findById(id1);
+        Optional<Conversation> byId = conversationRepository.findById(id);
         return byId.get();
     }
 }

@@ -12,7 +12,7 @@ import java.util.logging.Level;
 public class MyErrorHandler implements ResponseErrorHandler
 {
 
-    java.util.logging.Logger logger = java.util.logging.Logger.getAnonymousLogger();
+    private java.util.logging.Logger logger = java.util.logging.Logger.getAnonymousLogger();
 
     public MyErrorHandler()
     {

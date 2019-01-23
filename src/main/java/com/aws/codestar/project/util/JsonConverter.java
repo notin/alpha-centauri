@@ -6,7 +6,7 @@ import java.util.logging.Logger;
 
 public class JsonConverter
 {
-    static ObjectMapper mapper = new ObjectMapper();
+    private static ObjectMapper mapper = new ObjectMapper();
 
     public static String toJson(Object object)
     {

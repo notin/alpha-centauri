@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 import static com.aws.codestar.project.util.Helper.getUUID;
-import static com.aws.codestar.project.util.Helper.toJson;
+import static com.aws.codestar.project.util.JsonConverter.toJson;
 
 @Data
 @Entity

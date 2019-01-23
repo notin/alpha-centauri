@@ -27,7 +27,7 @@ public class RoomProviderController
         Logger.getAnonymousLogger().info(roomProvider.toString());
 
         String requesterId = roomProvider.getRequesterId();
-        Room room = roomProvider.getProvider().stream().filter(x -> x.isAvailable() == true && x.getUserId().equalsIgnoreCase(requesterId)).findFirst().get();
+        Room room = roomProvider.getProvider().stream().filter(x -> x.isAvailable() && x.getUserId().equalsIgnoreCase(requesterId)).findFirst().get();
         Logger.getAnonymousLogger().info("room being updated is "+room.getId());
         roomProviderService.reserveRoom(roomProvider, room);
         return roomProvider;
@@ -39,7 +39,7 @@ public class RoomProviderController
     {
         Logger.getAnonymousLogger().info(roomProviderService.toString());
 
-        RoomProvider roomProvider = roomProviderService.getRooms();
+        @SuppressWarnings("UnnecessaryLocalVariable") RoomProvider roomProvider = roomProviderService.getRooms();
 
         return roomProvider;
     }
