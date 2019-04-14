@@ -36,15 +36,30 @@ public class ConversationController
         Conversation conversation = null;
         if(id !=null & !id.equalsIgnoreCase("") & !id.equalsIgnoreCase("null"))
         {
-            conversation = conversationService.findConversationByID(id);
+            try
+            {
+                conversation = conversationService.findConversationByID(id);
+            }
+            catch (Exception e)
+            {
+                Logger.getAnonymousLogger().info(e.getMessage());
+                conversation = createConversation();
+            }
             return conversation;
         }
         else
         {
-           conversation = Conversation.builder().build();
-           conversation.getMessageItem().stream().forEachOrdered(x->x.setTimestamps(Helper.getCurrentLocalDateTimeStamp()));
+            conversation = createConversation();
         }
         Logger.getAnonymousLogger().info(conversation.toString());
+        return conversation;
+    }
+
+    private Conversation createConversation()
+    {
+        Conversation conversation;
+        conversation = Conversation.builder().build();
+        conversation.getMessageItem().stream().forEachOrdered(x->x.setTimestamps(Helper.getCurrentLocalDateTimeStamp()));
         return conversation;
     }
 }
