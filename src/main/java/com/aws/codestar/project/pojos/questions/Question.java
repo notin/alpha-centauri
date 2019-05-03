@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.aws.codestar.project.util.Helper.getUUID;
+import static com.aws.codestar.project.util.JsonConverter.toJson;
 
 @Data
 @Entity
@@ -32,7 +33,7 @@ public class Question
     @Override
     public String toString()
     {
-        return Helper.toJson(this);
+        return toJson(this);
     }
 
     public List<Options> getOption()

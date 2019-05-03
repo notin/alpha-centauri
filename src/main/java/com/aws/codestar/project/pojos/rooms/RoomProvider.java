@@ -11,7 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.aws.codestar.project.util.Helper.getUUID;
-import static com.aws.codestar.project.util.Helper.toJson;
+import static com.aws.codestar.project.util.JsonConverter.toJson;
+
 
 @Data
 @Entity
@@ -68,4 +69,5 @@ public class RoomProvider{
 	{
 		return toJson(this);
 	}
+
 }
