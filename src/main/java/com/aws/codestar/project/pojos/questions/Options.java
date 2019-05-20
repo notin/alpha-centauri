@@ -7,6 +7,7 @@ import lombok.Data;
 
 import javax.annotation.Generated;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 
 import static com.aws.codestar.project.util.Helper.getUUID;
 import static com.aws.codestar.project.util.JsonConverter.toJson;
@@ -16,6 +17,7 @@ import static com.aws.codestar.project.util.JsonConverter.toJson;
 @Builder
 public class Options
 {
+    @Id
     @JsonProperty("value")
     private String value;
 
